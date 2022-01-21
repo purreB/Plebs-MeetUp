@@ -4,6 +4,6 @@ import { Event } from './Event';
 export interface User {
   id: string;
   name: string;
-  favorite: Category;
-  event: Event[];
+  favorite: Category['name'] | undefined;
+  event: Event[] | undefined;
 }
