@@ -1,19 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import Landing from './Components/Landing/Landing';
+import Landing from './components/Landing/Landing';
 
-import GlobalStyle from "./styles/Globalstyle"
+import GlobalStyle from './styles/Globalstyle';
 
-const AppContainer = styled.div`
-`
+const AppContainer = styled.div``;
 
 function App() {
   return (
     <AppContainer>
-      <GlobalStyle/>
+      <GlobalStyle />
       <Landing />
     </AppContainer>
-    
   );
 }
 
