@@ -1,14 +1,19 @@
 import React from 'react';
-import './App.css';
-import Categories from './components/Category/Categories';
-import Events from './components/Events/Events';
+import styled from 'styled-components';
+import Landing from './Components/Landing/Landing';
+
+import GlobalStyle from "./styles/Globalstyle"
+
+const AppContainer = styled.div`
+`
 
 function App() {
   return (
-    <div className="App">
-      <Categories />
-      <Events />
-    </div>
+    <AppContainer>
+      <GlobalStyle/>
+      <Landing />
+    </AppContainer>
+    
   );
 }
 
