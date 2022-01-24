@@ -6,6 +6,7 @@ import BaseModalWrapper from "./components/Modal/BaseModalWrapper";
 import styled from "styled-components";
 import Landing from "./components/Landing/Landing";
 import GlobalStyle from "./styles/Globalstyle";
+import Eventdetails from "./components/Eventdetails/Eventdetails";
 
 const AppContainer = styled.div``;
 
@@ -23,7 +24,7 @@ function App() {
         onBackdropClick={toggleModal}
       /> */}
       <GlobalStyle />
-
+{/* <Eventdetails/> */}
       <Landing />
     </AppContainer>
   );
