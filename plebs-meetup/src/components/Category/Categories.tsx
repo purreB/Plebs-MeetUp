@@ -95,13 +95,17 @@ function Categories() {
   font-size:15px;
   `
 
+  function setLocalID(input: any){
+    localStorage.setItem("category", JSON.stringify(input))
+  }
+
   const [categories, setCategories] = useState<Category[]>(categoryData);
   return (
     <Container>
       <CategoriesUL>
         {categories.map((c) => (
           <CategoriesLI key={c.id} data-testid={"category" + c.id}>
-            <CategoryDiv>
+            <CategoryDiv onClick={() => setLocalID(c.id)}>
               <CategoryImage src={c.img}/>
               <CategoriesLI><ListParagraph>{c.name.toUpperCase()}</ListParagraph></CategoriesLI>
             </CategoryDiv>
