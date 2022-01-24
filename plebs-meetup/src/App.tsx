@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import "./App.css";
 import BaseModalWrapper from "./components/Modal/BaseModalWrapper";
 
-import styled from "styled-components";
-import Landing from "./components/Landing/Landing";
-import GlobalStyle from "./styles/Globalstyle";
-import Eventdetails from "./components/Eventdetails/Eventdetails";
+import styled from 'styled-components';
+import Landing from './components/Landing/Landing';
+
+import GlobalStyle from './styles/Globalstyle';
+import Events from './components/Events/Events';
+import Categories from './components/Category/Categories';
 
 const AppContainer = styled.div``;
 
@@ -24,8 +26,11 @@ function App() {
         onBackdropClick={toggleModal}
       /> */}
       <GlobalStyle />
-{/* <Eventdetails/> */}
-      <Landing />
+
+      <Landing /> 
+      <Categories />{' '}
+      {/*Categories and events are just here for testing purposes */}
+      <Events />
     </AppContainer>
   );
 }
