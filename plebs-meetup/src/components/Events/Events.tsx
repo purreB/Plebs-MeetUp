@@ -91,10 +91,9 @@ function Events() {
   const [events, setEvents] = useState<Event[]>(eventData);
 
   const fetchedUser = JSON.parse(localStorage.getItem('User')!);
-  const userFavorite = fetchedUser.favorite;
 
   useEffect(() => {
-    sortEvents(userFavorite);
+    sortEvents(fetchedUser.favorite);
   }, []);
 
   function sortEvents(arg: string): void {
