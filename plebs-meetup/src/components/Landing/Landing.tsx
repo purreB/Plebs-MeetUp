@@ -59,7 +59,6 @@ function Landing() {
       <Searchbar />
 
       <Categories />
-      <Events />
     </Container>
   );
 }

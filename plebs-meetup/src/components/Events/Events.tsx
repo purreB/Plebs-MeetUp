@@ -87,14 +87,14 @@ const EventUL = styled.ul`
   padding: 0;
 `;
 
-function Events() {
+function Events(props: { favorite: string }) {
   const [events, setEvents] = useState<Event[]>(eventData);
 
   const fetchedUser = JSON.parse(localStorage.getItem('User')!);
 
   useEffect(() => {
-    sortEvents(fetchedUser.favorite);
-  }, []);
+    sortEvents(props.favorite);
+  }, [props.favorite]);
 
   function sortEvents(arg: string): void {
     if (fetchedUser.favorite === arg) {
