@@ -112,7 +112,7 @@ function Events(props: { favorite: string }) {
 
   return (
     <div>
-      <EventUL>
+      <EventUL data-testid='eventList'>
         {events.map((e) => (
           <li key={e.id} data-testid={'event' + e.id}>
             <H3>{e.name}</H3>
