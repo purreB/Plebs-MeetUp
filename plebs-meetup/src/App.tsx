@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import './App.css';
-import BaseModalWrapper from './components/Modal/BaseModalWrapper';
+import "./App.css";
+import BaseModalWrapper from "./components/Modal/BaseModalWrapper";
 
-import styled from 'styled-components';
-import Landing from './components/Landing/Landing';
-
-import GlobalStyle from './styles/Globalstyle';
+import styled from "styled-components";
+import Landing from "./components/Landing/Landing";
+import GlobalStyle from "./styles/Globalstyle";
 
 const AppContainer = styled.div``;
 
@@ -18,11 +17,11 @@ function App() {
   };
   return (
     <AppContainer>
-      <button onClick={toggleModal}>Show modal test</button>
+      {/* <button onClick={toggleModal}>Show modal test</button>
       <BaseModalWrapper
         isModalVisible={isModalVisible}
         onBackdropClick={toggleModal}
-      />
+      /> */}
       <GlobalStyle />
 
       <Landing />

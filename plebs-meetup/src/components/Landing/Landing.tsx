@@ -10,9 +10,7 @@ import bgdesktop from "../../styles/bgdesktop.png"
 const Container = styled.div`
 background-color: #FA9270;
 display:flex;
-
 flex-direction:column;
-height:100vh;
 background-position:top;
 @media${device.mobileL}{
   background-image:url(${bgpic});
@@ -21,6 +19,8 @@ height:100vh;
 background-position-y: 69%;
 }
 font-family:${device.primaryFont};
+
+
 `
 
 const HeaderText = styled.h2`
@@ -59,7 +59,7 @@ function Landing() {
        <Searchbar/>
        
           <Categories/>
-         {/* <Events /> */}
+         <Events />
       </Container>
     )
 }

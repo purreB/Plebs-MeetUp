@@ -111,6 +111,10 @@ function Categories() {
     font-size: 15px;
   `;
 
+  function setLocalID(input: any){
+    localStorage.setItem("category", JSON.stringify(input))
+  }
+
   const [categories, setCategories] = useState<Category[]>(categoryData);
 
   function setLocalStore(cName: string) {
