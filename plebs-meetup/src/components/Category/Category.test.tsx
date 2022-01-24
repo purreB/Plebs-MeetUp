@@ -21,7 +21,6 @@ describe('Category list component', () => {
     expect(fetchedUser).toHaveProperty('id' && 'name');
   });
 
-  // when a category is clicked, set favorite to category in LocalStorage
   it('when a category is clicked, it gets added to user favorite', () => {
     setup();
     const chosenCategory = screen.getByText('MUSIC');

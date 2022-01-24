@@ -1,4 +1,5 @@
 import { Category } from './Category';
+import { Comments } from './Comments';
 
 export interface Event {
   id: number;
@@ -6,4 +7,5 @@ export interface Event {
   category: Category;
   date: string;
   time: string;
+  comments: Comments[] | undefined;
 }

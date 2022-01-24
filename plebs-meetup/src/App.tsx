@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import Landing from './components/Landing/Landing';
 
 import GlobalStyle from './styles/Globalstyle';
+import Events from './components/Events/Events';
+import Categories from './components/Category/Categories';
 
 const AppContainer = styled.div``;
 
@@ -18,14 +20,17 @@ function App() {
   };
   return (
     <AppContainer>
-      <button onClick={toggleModal}>Show modal test</button>
+      {/* <button onClick={toggleModal}>Show modal test</button>
       <BaseModalWrapper
         isModalVisible={isModalVisible}
         onBackdropClick={toggleModal}
       />
       <GlobalStyle />
 
-      <Landing />
+      <Landing /> */}
+      <Categories />{' '}
+      {/*Categories and events are just here for testing purposes */}
+      <Events />
     </AppContainer>
   );
 }
