@@ -49,7 +49,7 @@ describe('Event list component', () => {
       </>
     );
     const chosenEventButton1 = screen.getByTestId('Music Festival Stockholm');
-    const chosenEventButton2 = screen.getByTestId('Music Festival Gothenburg');
+    const chosenEventButton2 = screen.getByTestId('LAN Event Stockholm');
     userEvent.click(chosenEventButton1);
     userEvent.click(chosenEventButton2);
     const fetchedUser = JSON.parse(localStorage.getItem('User')!);

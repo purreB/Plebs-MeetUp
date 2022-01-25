@@ -121,9 +121,16 @@ function Events() {
         eventArr.map((e: any) => {
           if (e.id === event.id) {
             console.warn('EVENT ALREADY ADDED TO LIST');
+            let index = eventArr.indexOf(e);
+            eventArr.splice(index, 1);
             eventAlreadyAdded = true;
+            if (eventAlreadyAdded) {
+              fetchedUser.event = eventArr;
+              console.log(fetchedUser.event);
+              localStorage.setItem('User', JSON.stringify(fetchedUser));
+            }
           }
-          return eventAlreadyAdded;
+          return eventAlreadyAdded; //&& eventArr;
         });
       }
     } else {
