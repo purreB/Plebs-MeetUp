@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import bgdetails from "../../styles/bgdetails.png"
 import device from '../../styles/mediaqueries'
+import { useParams } from "react-router-dom" 
 
 const Container = styled.div`
 background-color: #FA9270;
@@ -126,6 +127,9 @@ padding-left:0.5em;
 
 
 function Eventdetails() {
+
+    let { id } = useParams<{id: string}>();
+    console.log("id är", id)
     return (
        <Container>
            <Ptext>Event detaljer</Ptext>
