@@ -172,20 +172,27 @@ padding-bottom:1.3em;
 
   function attendEvent(event: any) {
     let fetchedUser = JSON.parse(localStorage.getItem('User')!);
+    let userEventExists: boolean = false;
+    let eventAlreadyAdded: boolean = false;
+
     if (fetchedUser.event !== undefined) {
-      let eventArr = fetchedUser.event;
-      eventArr.map((e: any) => {
-        if (e.id === event.id) {
-          console.log('EYO');
-        }
-      });
-    } else if (fetchedUser.event && fetchedUser.event.length >= 1) {
-      //! Cannot add two events yet
-      let storageEventArray = [...fetchedUser.event, event];
-      storageEventArray.push(event); //* HAVE TO BE SOME TYPE OF ARRAY
-      localStorage.setItem('User', JSON.stringify(fetchedUser));
+      userEventExists = true;
+      if (userEventExists) {
+        let eventArr = fetchedUser.event;
+        eventArr.map((e: any) => {
+          if (e.id === event.id) {
+            console.warn('EVENT ALREADY ADDED TO LIST');
+            eventAlreadyAdded = true;
+          }
+          return eventAlreadyAdded;
+        });
+      }
     } else {
-      fetchedUser.event = [event]; //* HAVE TO BE SOME TYPE OF ARRAY
+      fetchedUser.event = [event];
+      localStorage.setItem('User', JSON.stringify(fetchedUser));
+    }
+    if (userEventExists && eventAlreadyAdded === false) {
+      fetchedUser.event = [event, ...fetchedUser.event];
       localStorage.setItem('User', JSON.stringify(fetchedUser));
     }
   }

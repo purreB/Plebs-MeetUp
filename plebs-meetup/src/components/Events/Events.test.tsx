@@ -40,7 +40,21 @@ describe('Event list component', () => {
     const fetchedUser = JSON.parse(localStorage.getItem('User')!);
     expect(fetchedUser.event).toHaveLength(1);
   });
+
+  it('User can attend multiple events', () => {
+    render(
+      <>
+        <Categories />
+        <Events />
+      </>
+    );
+    const chosenEventButton1 = screen.getByTestId('Music Festival Stockholm');
+    const chosenEventButton2 = screen.getByTestId('Music Festival Gothenburg');
+    userEvent.click(chosenEventButton1);
+    userEvent.click(chosenEventButton2);
+    const fetchedUser = JSON.parse(localStorage.getItem('User')!);
+    expect(fetchedUser.event).toHaveLength(2);
+  });
   // When attend button is clicked, button text changes to "cancel attending"
   // When trying to sign up twice to event, it insteads cancels the sign up.
-  // User can attend multiple events
 });
