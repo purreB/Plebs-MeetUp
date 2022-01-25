@@ -30,7 +30,6 @@ function App() {
       <Landing /> */}
       <Categories />{' '}
       {/*Categories and events are just here for testing purposes */}
-      <Events />
     </AppContainer>
   );
 }

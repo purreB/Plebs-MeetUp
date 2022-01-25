@@ -4,6 +4,8 @@ import { User } from '../../models/User';
 import styled from 'styled-components';
 import device from '../../styles/mediaqueries';
 import { nanoid } from 'nanoid';
+import { Event } from '../../models/Event';
+import Events from '../Events/Events';
 
 const Container = styled.div``;
 
@@ -111,17 +113,20 @@ function Categories() {
   `;
 
   const [categories, setCategories] = useState<Category[]>(categoryData);
+  const [favorite, setFavorite] = useState<string>('');
 
   function setLocalStore(cName: string) {
     let fetchedUser = JSON.parse(localStorage.getItem('User')!);
+
     fetchedUser.favorite = cName;
     localStorage.setItem('User', JSON.stringify(fetchedUser));
+    setFavorite(cName);
   }
   return (
     <Container>
       <CategoriesUL>
         {categories.map((c) => (
-          <CategoriesLI key={c.id} data-testid={'category' + c.id}>
+          <CategoriesLI key={c.id} data-testid={'category'}>
             <CategoryDiv onClick={() => setLocalStore(c.name)}>
               <CategoryImage src={c.img} />
               <ListParagraph>{c.name.toUpperCase()}</ListParagraph>
@@ -129,6 +134,7 @@ function Categories() {
           </CategoriesLI>
         ))}
       </CategoriesUL>
+      <Events favorite={favorite} />
     </Container>
   );
 }

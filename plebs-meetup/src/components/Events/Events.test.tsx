@@ -5,22 +5,17 @@ import Categories from '../Category/Categories';
 
 describe('Event list component', () => {
   it('Renders without crashing', () => {
-    render(<Events />);
+    render(<Events favorite={'Cars'} />);
   });
 
   it('Renders correct amount of events', () => {
-    render(<Events />);
+    render(<Events favorite={'Cars'} />);
     const items = screen.getAllByTestId('event');
     expect(items.length).toBe(10);
   });
 
   it('When attend button is clicked, user gets signed up to the event', () => {
-    render(
-      <>
-        <Categories />
-        <Events />
-      </>
-    );
+    render(<Categories />);
     const chosenEventButton = screen.getByTestId('Music Festival Stockholm');
     userEvent.click(chosenEventButton);
     const fetchedUser = JSON.parse(localStorage.getItem('User')!);
@@ -28,12 +23,7 @@ describe('Event list component', () => {
   });
 
   it('User can not sign up to same event twice', () => {
-    render(
-      <>
-        <Categories />
-        <Events />
-      </>
-    );
+    render(<Categories />);
     const chosenEventButton = screen.getByTestId('Music Festival Stockholm');
     userEvent.click(chosenEventButton);
     userEvent.click(chosenEventButton);

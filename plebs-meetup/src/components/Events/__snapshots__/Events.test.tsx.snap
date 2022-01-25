@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Event list component should display the list 1`] = `
+<DocumentFragment>
+  <events
+    favorite="Cars"
+  />
+</DocumentFragment>
+`;
