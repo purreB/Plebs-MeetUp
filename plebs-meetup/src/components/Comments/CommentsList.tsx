@@ -1,7 +1,7 @@
 import React from 'react';
-import { Comment } from '../../models/Comments';
+import { Comments } from '../../models/Comments';
 
-const CommentsList: React.FC<{ comments: Comment[] }> = (props) => {
+const CommentsList: React.FC<{ comments: Comments[] }> = (props) => {
   return (
     <ul>
       {props.comments.map((comment) => (

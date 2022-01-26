@@ -103,21 +103,14 @@ const EventUL = styled.ul`
 
 const Events: React.FC<{ favorite: string }> = (props: any) => {
   const [events, setEvents] = useState<Event[]>(eventData);
+  const [comments, setComments] = useState<string>('');
 
   const fetchedUser = JSON.parse(localStorage.getItem('User')!);
 
-  const addCommentHandler = (commentText: string, id: number) => {
-    const comment = new Comment(commentText, id);
-
-    if (events) {
-      events[id].comments.push(comment);
-    }
-
-    console.log('testa comment', events[id].comments);
-  };
   useEffect(() => {
     sortEvents(props.favorite);
-  }, [props.favorite]);
+    setComments('');
+  }, [props.favorite, comments]);
 
   function sortEvents(arg: string): void {
     if (fetchedUser && fetchedUser.favorite && fetchedUser.favorite === arg) {
@@ -132,6 +125,18 @@ const Events: React.FC<{ favorite: string }> = (props: any) => {
       setEvents(joinArray);
     }
   }
+
+  const addCommentHandler = (commentText: string, id: number) => {
+    const comment = new Comment(commentText, id);
+
+    if (events) {
+      events[id].comments.push(comment);
+    }
+
+    setComments('nice');
+
+    console.log(`event ${events[id].name}`, events[id].comments);
+  };
 
   // const allEvents = eventData.map((data) => {
   //   return data;
@@ -178,7 +183,7 @@ const Events: React.FC<{ favorite: string }> = (props: any) => {
             <div>
               <NewComment onAddComment={addCommentHandler} id={i} />
               {e.comments.map((comment) => (
-                <div>{comment.comment}</div>
+                <CommentsList comments={[comment]} />
               ))}
             </div>
           </li>
