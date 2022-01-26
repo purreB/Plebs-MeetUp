@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react';
 import { Event } from '../../models/Event';
 import styled from 'styled-components';
 import Landing from '../Landing/Landing';
+import NewComment from '../Comments/NewComment';
+import CommentsList from '../Comments/CommentsList';
+import { Comment } from '../../models/Comments';
+
 const eventData: Event[] = [
   {
     id: 1,
@@ -9,7 +13,7 @@ const eventData: Event[] = [
     category: { id: 1, name: 'music', img: 'hej' },
     date: '2022-03-10',
     time: '15:00',
-    comments: undefined,
+    comments: [],
   },
   {
     id: 2,
@@ -17,7 +21,7 @@ const eventData: Event[] = [
     category: { id: 1, name: 'music', img: 'hej' },
     date: '2022-04-10',
     time: '10:00',
-    comments: undefined,
+    comments: [],
   },
   {
     id: 3,
@@ -25,7 +29,7 @@ const eventData: Event[] = [
     category: { id: 2, name: 'Movies', img: 'hej' },
     date: '2022-11-10',
     time: '19:00',
-    comments: undefined,
+    comments: [],
   },
   {
     id: 4,
@@ -33,7 +37,7 @@ const eventData: Event[] = [
     category: { id: 2, name: 'Movies', img: 'hej' },
     date: '2022-12-05',
     time: '20:00',
-    comments: undefined,
+    comments: [],
   },
   {
     id: 5,
@@ -41,7 +45,7 @@ const eventData: Event[] = [
     category: { id: 3, name: 'Gaming', img: 'hej' },
     date: '2022-10-10',
     time: '15:00',
-    comments: undefined,
+    comments: [],
   },
   {
     id: 6,
@@ -49,7 +53,7 @@ const eventData: Event[] = [
     category: { id: 3, name: 'Gaming', img: 'hej' },
     date: '2022-11-11',
     time: '15:00',
-    comments: undefined,
+    comments: [],
   },
   {
     id: 7,
@@ -57,7 +61,7 @@ const eventData: Event[] = [
     category: { id: 4, name: 'Art', img: 'hej' },
     date: '2022-03-03',
     time: '11:00',
-    comments: undefined,
+    comments: [],
   },
   {
     id: 8,
@@ -65,7 +69,7 @@ const eventData: Event[] = [
     category: { id: 4, name: 'Art', img: 'hej' },
     date: '2022-04-04',
     time: '13:00',
-    comments: undefined,
+    comments: [],
   },
   {
     id: 9,
@@ -73,7 +77,7 @@ const eventData: Event[] = [
     category: { id: 5, name: 'Cars', img: 'hej' },
     date: '2022-05-22',
     time: '13:00',
-    comments: undefined,
+    comments: [],
   },
   {
     id: 10,
@@ -81,7 +85,7 @@ const eventData: Event[] = [
     category: { id: 5, name: 'Cars', img: 'hej' },
     date: '2022-08-21',
     time: '13:00',
-    comments: undefined,
+    comments: [],
   },
 ];
 
@@ -102,6 +106,15 @@ const Events: React.FC<{ favorite: string }> = (props: any) => {
 
   const fetchedUser = JSON.parse(localStorage.getItem('User')!);
 
+  const addCommentHandler = (commentText: string, id: number) => {
+    const comment = new Comment(commentText, id);
+
+    if (events) {
+      events[id].comments.push(comment);
+    }
+
+    console.log('testa comment', events[id].comments);
+  };
   useEffect(() => {
     sortEvents(props.favorite);
   }, [props.favorite]);
@@ -153,7 +166,7 @@ const Events: React.FC<{ favorite: string }> = (props: any) => {
   return (
     <div>
       <EventUL data-testid='eventList'>
-        {events.map((e) => (
+        {events.map((e, i) => (
           <li key={e.id} data-testid='event'>
             <H3>{e.name}</H3>
             <P>{e.category.name}</P>
@@ -162,6 +175,12 @@ const Events: React.FC<{ favorite: string }> = (props: any) => {
             <button onClick={() => attendEvent(e)} data-testid={e.name}>
               Attend: {e.name}
             </button>
+            <div>
+              <NewComment onAddComment={addCommentHandler} id={i} />
+              {e.comments.map((comment) => (
+                <div>{comment.comment}</div>
+              ))}
+            </div>
           </li>
         ))}
       </EventUL>

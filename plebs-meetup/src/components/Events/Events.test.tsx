@@ -30,7 +30,7 @@ describe('Event list component', () => {
     const fetchedUser = JSON.parse(localStorage.getItem('User')!);
     expect(fetchedUser.event).toHaveLength(1);
   });
+  // User can attend multiple events
   // When attend button is clicked, button text changes to "cancel attending"
   // When trying to sign up twice to event, it insteads cancels the sign up.
-  // User can attend multiple events
 });

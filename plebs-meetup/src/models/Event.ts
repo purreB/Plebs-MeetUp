@@ -7,5 +7,5 @@ export interface Event {
   category: Category;
   date: string;
   time: string;
-  comments: Comments[] | undefined;
+  comments: Comments[];
 }
