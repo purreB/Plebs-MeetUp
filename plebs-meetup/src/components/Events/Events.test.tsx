@@ -21,40 +21,32 @@ describe('Event list component', () => {
         <Events />
       </>
     );
-    const chosenEventButton = screen.getByTestId('Music Festival Stockholm');
+    const chosenEventButton = screen.getByTestId('1');
     userEvent.click(chosenEventButton);
     const fetchedUser = JSON.parse(localStorage.getItem('User')!);
     expect(fetchedUser).toHaveProperty('id' && 'name' && 'event');
   });
 
-  it('User can not sign up to same event twice', () => {
-    render(
-      <>
-        <Categories />
-        <Events />
-      </>
-    );
-    const chosenEventButton = screen.getByTestId('Music Festival Stockholm');
+  it('User can not sign up to same event twice', async () => {
+    render(<Events />);
+    const chosenEventButton = screen.getByTestId('1');
     userEvent.click(chosenEventButton);
-    userEvent.click(chosenEventButton);
-    const fetchedUser = JSON.parse(localStorage.getItem('User')!);
-    expect(fetchedUser.event).toHaveLength(1);
+    setTimeout(() => {
+      userEvent.click(chosenEventButton);
+    }, 100);
+    const fetchedUser = await JSON.parse(localStorage.getItem('User')!);
+    expect(fetchedUser.event).toHaveLength(0);
   });
 
-  it('User can attend multiple events', () => {
-    render(
-      <>
-        <Categories />
-        <Events />
-      </>
-    );
-    const chosenEventButton1 = screen.getByTestId('Music Festival Stockholm');
-    const chosenEventButton2 = screen.getByTestId('LAN Event Stockholm');
-    userEvent.click(chosenEventButton1);
-    userEvent.click(chosenEventButton2);
-    const fetchedUser = JSON.parse(localStorage.getItem('User')!);
-    expect(fetchedUser.event).toHaveLength(2);
+  it('User can attend multiple events', async () => {
+    render(<Events />);
+    const eventOne = screen.getByTestId('1');
+    const eventTwo = screen.getByTestId('2');
+    userEvent.click(eventOne);
+    userEvent.click(eventTwo);
+    let fetchedUser = await JSON.parse(localStorage.getItem('User')!);
+    let userEvents = fetchedUser.event;
+    expect(userEvents).toHaveLength(2);
   });
   // When attend button is clicked, button text changes to "cancel attending"
-  // When trying to sign up twice to event, it insteads cancels the sign up.
 });

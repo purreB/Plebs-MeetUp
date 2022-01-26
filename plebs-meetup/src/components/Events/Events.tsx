@@ -126,11 +126,10 @@ function Events() {
             eventAlreadyAdded = true;
             if (eventAlreadyAdded) {
               fetchedUser.event = eventArr;
-              console.log(fetchedUser.event);
               localStorage.setItem('User', JSON.stringify(fetchedUser));
             }
           }
-          return eventAlreadyAdded; //&& eventArr;
+          return eventAlreadyAdded;
         });
       }
     } else {
@@ -152,7 +151,7 @@ function Events() {
             <P>{e.category.name}</P>
             <P>{e.date}</P>
             <P>{e.time}</P>
-            <button onClick={() => attendEvent(e)} data-testid={e.name}>
+            <button onClick={() => attendEvent(e)} data-testid={e.id}>
               Attend: {e.name}
             </button>
           </li>
