@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Event } from '../../models/Event';
 import styled from 'styled-components';
-import Landing from '../Landing/Landing';
 
 function Events() {
   const eventData: Event[] = [
@@ -99,28 +98,17 @@ function Events() {
     margin: 0;
     padding: 0;
   `;
-  // const allEvents = eventData.map((data) => {
-  //   return data;
-  // });
-
-  // const totalEvents = allEvents.filter((data) => {
-  //   return data.category.id;
-  // });
-
-  // console.log(totalEvents);
 
   function attendEvent(event: any) {
     let fetchedUser = JSON.parse(localStorage.getItem('User')!);
     let userEventExists: boolean = false;
     let eventAlreadyAdded: boolean = false;
-
     if (fetchedUser.event !== undefined) {
       userEventExists = true;
       if (userEventExists) {
         let eventArr = fetchedUser.event;
         eventArr.map((e: any) => {
           if (e.id === event.id) {
-            console.warn('EVENT ALREADY ADDED TO LIST');
             let index = eventArr.indexOf(e);
             eventArr.splice(index, 1);
             eventAlreadyAdded = true;

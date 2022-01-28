@@ -42,8 +42,8 @@ describe('Event list component', () => {
     render(<Events />);
     const eventOne = screen.getByTestId('1');
     const eventTwo = screen.getByTestId('2');
-    userEvent.click(eventOne);
     userEvent.click(eventTwo);
+    userEvent.click(eventOne);
     let fetchedUser = await JSON.parse(localStorage.getItem('User')!);
     let userEvents = fetchedUser.event;
     expect(userEvents).toHaveLength(2);
