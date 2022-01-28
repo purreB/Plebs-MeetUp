@@ -1,7 +1,6 @@
 import { useState, useEffect, MouseEvent } from 'react';
 import { Event } from '../../models/Event';
 import styled from 'styled-components';
-import Landing from '../Landing/Landing';
 import NewComment from '../Comments/NewComment';
 import CommentsList from '../Comments/CommentsList';
 import { Comment } from '../../models/Comments';

@@ -1,11 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Categories from '../Category/Categories';
-import Events from '../Events/Events';
 import device from '../../styles/mediaqueries';
 import bgpic from '../../styles/bgtest.png';
 import Searchbar from '../Searchbar/Searchbar';
-import bgdesktop from '../../styles/bgdesktop.png';
 
 const Container = styled.div`
   background-color: #fa9270;
@@ -43,8 +41,6 @@ const Pdiv = styled.div`
   width: 100%;
   line-height: 1.3em;
 `;
-
-interface eventData {}
 
 function Landing() {
   return (

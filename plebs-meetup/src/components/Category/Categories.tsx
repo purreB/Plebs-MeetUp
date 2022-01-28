@@ -4,7 +4,6 @@ import { User } from '../../models/User';
 import styled from 'styled-components';
 import device from '../../styles/mediaqueries';
 import { nanoid } from 'nanoid';
-import { Event } from '../../models/Event';
 import Events from '../Events/Events';
 
 const Container = styled.div``;
