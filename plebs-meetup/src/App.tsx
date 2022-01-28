@@ -28,7 +28,7 @@ function App() {
       <GlobalStyle />
 
       <Landing /> */}
-      <Categories />{' '}
+      <Categories />
       {/*Categories and events are just here for testing purposes */}
     </AppContainer>
   );
