@@ -16,9 +16,18 @@ const NewComment: React.FC<{
     props.onAddComment(enteredText, props.id);
   };
 
+  const reset = () => {
+    commentInputRef.current!.value = '';
+  };
+
   return (
-    <form onSubmit={submitHandler}>
-      <label htmlFor='text'>Post a comment</label>
+    <form
+      onSubmit={(e) => {
+        submitHandler(e);
+        reset();
+      }}
+    >
+      <label htmlFor='text'>Post a comment: </label>
       <input type='text' id='text' ref={commentInputRef} />
       <button data-testid={props.id}>Post</button>
     </form>
