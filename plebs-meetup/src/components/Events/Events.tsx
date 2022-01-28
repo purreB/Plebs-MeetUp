@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, MouseEvent } from 'react';
 import { Event } from '../../models/Event';
 import styled from 'styled-components';
 import Landing from '../Landing/Landing';
@@ -101,6 +101,21 @@ const EventUL = styled.ul`
   padding: 0;
 `;
 
+const Button = styled.button`
+  cursor: pointer;
+  :hover {
+    background-color: gray;
+  }
+
+  .active {
+    background-color: green;
+  }
+
+  .not-active {
+    background-color: orange;
+  }
+`;
+
 const Events: React.FC<{ favorite: string }> = (props: any) => {
   const [events, setEvents] = useState<Event[]>(eventData);
   const [comments, setComments] = useState<string>('');
@@ -133,23 +148,14 @@ const Events: React.FC<{ favorite: string }> = (props: any) => {
       events[id].comments.push(comment);
     }
 
-    setComments('nice');
+    setComments('rerender');
 
     console.log(`event ${events[id].name}`, events[id].comments);
   };
 
-  // const allEvents = eventData.map((data) => {
-  //   return data;
-  // });
-
-  // const totalEvents = allEvents.filter((data) => {
-  //   return data.category.id;
-  // });
-
-  // console.log(totalEvents);
-
   function attendEvent(event: any) {
     let fetchedUser = JSON.parse(localStorage.getItem('User')!);
+
     if (fetchedUser.event !== undefined) {
       let eventArr = fetchedUser.event;
       eventArr.map((e: any) => {
@@ -167,6 +173,10 @@ const Events: React.FC<{ favorite: string }> = (props: any) => {
       localStorage.setItem('User', JSON.stringify(fetchedUser));
     }
   }
+  const buttonHandler = (event: MouseEvent<HTMLButtonElement>) => {
+    const button: HTMLButtonElement = event.currentTarget;
+    button.style.backgroundColor = 'green';
+  };
 
   return (
     <div>
@@ -177,7 +187,15 @@ const Events: React.FC<{ favorite: string }> = (props: any) => {
             <P>{e.category.name}</P>
             <P>{e.date}</P>
             <P>{e.time}</P>
-            <button onClick={() => attendEvent(e)} data-testid={e.name}>
+
+            <button
+              onClick={(b) => {
+                buttonHandler(b);
+                attendEvent(e);
+              }}
+              data-testid={e.name}
+              name={e.name}
+            >
               Attend: {e.name}
             </button>
             <div>

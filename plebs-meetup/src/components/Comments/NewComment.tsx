@@ -20,7 +20,7 @@ const NewComment: React.FC<{
     <form onSubmit={submitHandler}>
       <label htmlFor='text'>Post a comment</label>
       <input type='text' id='text' ref={commentInputRef} />
-      <button>Post</button>
+      <button data-testid={props.id}>Post</button>
     </form>
   );
 };
