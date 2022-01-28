@@ -11,7 +11,7 @@ describe('Category list component', () => {
 
   it('renders correct amount of categories', () => {
     setup();
-    const items = screen.getAllByRole('listitem');
+    const items = screen.getAllByTestId('category');
     expect(items.length).toBe(5);
   });
 
