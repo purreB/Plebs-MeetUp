@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import NewComment from '../Comments/NewComment';
 import CommentsList from '../Comments/CommentsList';
 import { Comment } from '../../models/Comments';
+import { motion } from 'framer-motion';
 
 const eventData: Event[] = [
   {
@@ -97,19 +98,15 @@ const H3 = styled.h3`
 
 const EventUL = styled.ul`
   margin: 0;
+  margin-top: 10rem;
   padding: 0;
-`;
 
-const Button = styled.button`
-  cursor: pointer;
-  :hover {
-    background-color: gray;
-  }
-  .active {
-    background-color: green;
-  }
-  .not-active {
-    background-color: orange;
+  .btn-attend {
+    background-color: #0a9396;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-radius: 5px;
+    color: #ffffff;
   }
 `;
 
@@ -183,29 +180,44 @@ const Events: React.FC<{ favorite: string }> = (props: any) => {
 
   const buttonHandler = (event: MouseEvent<HTMLButtonElement>) => {
     const button: HTMLButtonElement = event.currentTarget;
-    button.style.backgroundColor = 'green';
+    button.style.backgroundColor =
+      button.style.backgroundColor === '' ? '#a4e6e7' : '';
+    button.style.color = button.style.color === '' ? '#000000' : '';
   };
 
   return (
     <div>
-      <EventUL data-testid="eventList">
+      <EventUL data-testid='eventList'>
         {events.map((e, i) => (
-          <li key={e.id} data-testid="event">
+          <li
+            style={{
+              margin: '2rem',
+              backgroundColor: '#E9D8A6',
+              boxShadow: '0, 0, 0, 0.3',
+              borderRadius: '5px',
+              listStyle: 'none',
+              padding: '1rem',
+            }}
+            key={e.id}
+            data-testid='event'
+          >
             <H3>{e.name}</H3>
             <P>{e.category.name}</P>
             <P>{e.date}</P>
             <P>{e.time}</P>
 
-            <button
+            <motion.button
               onClick={(b) => {
                 buttonHandler(b);
                 attendEvent(e);
               }}
               data-testid={e.name}
               name={e.name}
+              className={'btn-attend'}
+              whileHover={{ scale: 1.05 }}
             >
               Attend: {e.name}
-            </button>
+            </motion.button>
             <div>
               <NewComment onAddComment={addCommentHandler} id={i} />
               {e.comments.map((comment) => (

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import device from '../../styles/mediaqueries';
 import { nanoid } from 'nanoid';
 import Events from '../Events/Events';
+import { motion } from 'framer-motion';
 
 const Container = styled.div``;
 
@@ -66,7 +67,7 @@ const CategoriesUL = styled.ul`
   }
 `;
 
-const CategoriesLI = styled.li``;
+const CategoriesLI = styled(motion.li)``;
 
 const CategoryDiv = styled.div`
   /* display: flex;
@@ -123,7 +124,12 @@ function Categories() {
     <Container>
       <CategoriesUL>
         {categories.map((c) => (
-          <CategoriesLI key={c.id} data-testid={'category'}>
+          <CategoriesLI
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.05 }}
+            key={c.id}
+            data-testid={'category'}
+          >
             <CategoryDiv onClick={() => setLocalStore(c.name)}>
               <CategoryImage src={c.img} />
               <ListParagraph>{c.name.toUpperCase()}</ListParagraph>
