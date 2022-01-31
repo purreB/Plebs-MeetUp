@@ -4,9 +4,10 @@ import Categories from '../Category/Categories';
 import device from '../../styles/mediaqueries';
 import bgpic from '../../styles/bgtest.png';
 import Searchbar from '../Searchbar/Searchbar';
+import { motion } from 'framer-motion';
 
 const Container = styled.div`
-  background-color: #fa9270;
+  background-color: #e06e48;
   display: flex;
 
   flex-direction: column;
@@ -45,13 +46,19 @@ const Pdiv = styled.div`
 function Landing() {
   return (
     <Container>
-      <HeaderText>Vad letar du efter?</HeaderText>
-      <Pdiv>
-        <Ptext>
-          Hitta ett event, låt dig inspireras av vad som händer just nu eller
-          sök efter dina intressen!
-        </Ptext>
-      </Pdiv>
+      <motion.div
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1 }}
+      >
+        <HeaderText>Vad letar du efter?</HeaderText>
+        <Pdiv>
+          <Ptext>
+            Hitta ett event, låt dig inspireras av vad som händer just nu eller
+            sök efter dina intressen!
+          </Ptext>
+        </Pdiv>
+      </motion.div>
       <Searchbar />
 
       <Categories />
