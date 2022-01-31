@@ -13,19 +13,19 @@ const H3 = styled.h3`
 `;
 
 function Categories() {
-  useEffect(() => {
-    if (localStorage.getItem('User')) {
-      return;
-    } else {
-      const User: User = {
-        id: nanoid(),
-        name: nanoid(),
-        favorite: undefined,
-        event: undefined,
-      };
-      localStorage.setItem('User', JSON.stringify(User));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem('User')) {
+  //     return;
+  //   } else {
+  //     const User: User = {
+  //       id: nanoid(),
+  //       name: nanoid(),
+  //       favorite: undefined,
+  //       event: undefined,
+  //     };
+  //     localStorage.setItem('User', JSON.stringify(User));
+  //   }
+  // }, []);
 
   const categoryData: Category[] = [
     {
@@ -109,6 +109,8 @@ function Categories() {
     margin: 0;
     font-size: 15px;
   `;
+  let fetchedUser = JSON.parse(localStorage.getItem('User')!);
+  console.log(fetchedUser)
 
   function setLocalID(input: any){
     localStorage.setItem("category", JSON.stringify(input))
@@ -118,7 +120,12 @@ function Categories() {
 
   function setLocalStore(cName: string) {
     let fetchedUser = JSON.parse(localStorage.getItem('User')!);
-    fetchedUser.favorite = cName;
+    
+    const setFavorite = fetchedUser.filter((data : any) => {
+      return data 
+    })[10]
+    console.log(setFavorite)
+    setFavorite.favorite = cName;
     localStorage.setItem('User', JSON.stringify(fetchedUser));
   }
   return (

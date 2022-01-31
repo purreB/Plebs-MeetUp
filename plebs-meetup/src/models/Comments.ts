@@ -1,7 +1,7 @@
 import { Event } from './Event';
 export interface Comments {
-  id: number;
+  postedByName: string;
   eventID: Event['id'];
   posted: string;
-  comment: string;
+  comments: string[];
 }

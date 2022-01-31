@@ -15,7 +15,7 @@ const SearchInput = styled.input`
     
   ::placeholder {
     color: #8a8788cc;
-    padding-left:1.7em;
+ 
   }
 
   @media${device.mobileL}{
@@ -36,7 +36,7 @@ function Searchbar() {
   return (
     <>
       <SearchDiv>
-      <SearchIcon style={{position:"absolute", marginLeft:"-68.5%", fontSize:"25px", color:"lightgray",}}/>
+      <SearchIcon style={{position:"absolute", marginRight:"-68.5%", fontSize:"25px", color:"lightgray",}}/>
         <SearchInput type="text" placeholder="Sök på aktivitet">
             
         </SearchInput>

@@ -5,4 +5,6 @@ describe('Event list component', () => {
   it('Renders without crashing', () => {
     render(<Eventdetails />);
   });
+
+  
 });

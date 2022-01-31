@@ -4,6 +4,15 @@ import styled from 'styled-components';
 import {useHistory} from "react-router-dom"
 import device from '../../styles/mediaqueries';
 import { useEffect } from 'react';
+import { Button } from '@mui/material';
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import Eventdetails from '../Eventdetails/Eventdetails';
+import create from "zustand"
+import { domainToASCII } from 'node:url';
+import { nanoid } from 'nanoid';
+import {Comments} from '../../models/Comments';
+import { time } from 'node:console';
+
 
 function Events() {
   const eventData: Event[] = [
@@ -13,7 +22,8 @@ function Events() {
       category: { id: 1, name: 'music', img: 'https://1b7ta73fjmj23201tc3suvsi-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/Vito-Valentinetti-Way-Out-West-2018-24.jpg' },
       date: '2022-03-10',
       time: '15:00',
-      comments: undefined,
+      plats: "Stockholm",
+      comments: [],
     },
     {
       id: 2,
@@ -21,7 +31,8 @@ function Events() {
       category: { id: 1, name: 'music', img: 'https://upload.wikimedia.org/wikipedia/commons/f/fd/Wayoutwestentrance.jpg' },
       date: '2022-04-10',
       time: '10:00',
-      comments: undefined,
+      plats: "Göteborg, Slottskogen",
+      comments: [],
     },
     {
       id: 3,
@@ -29,7 +40,8 @@ function Events() {
       category: { id: 2, name: 'Movies', img: 'https://phantom-marca.unidadeditorial.es/8a06a3abe5fcaebda6c9462c899d8ae9/resize/1320/f/jpg/assets/multimedia/imagenes/2021/08/10/16286161657414.jpg' },
       date: '2022-11-10',
       time: '19:00',
-      comments: undefined,
+      plats: "Beverly Hills, THX Cinema",
+      comments: [],
     },
     {
       id: 4,
@@ -37,7 +49,8 @@ function Events() {
       category: { id: 2, name: 'Movies', img: 'https://external-preview.redd.it/lhe3DwrMN6uLgg4M1eoETdQM0g2tZiz2jVDY73v2rwM.jpg?auto=webp&s=54420b06f6fb9583da192ce7c734763a02a956fa' },
       date: '2022-12-05',
       time: '20:00',
-      comments: undefined,
+      plats: "Houston Cinema Center",
+      comments: [],
     },
     {
       id: 5,
@@ -45,7 +58,8 @@ function Events() {
       category: { id: 3, name: 'Gaming', img: 'https://www.eslgaming.com/sites/default/files/styles/blog_big/public/LAN-Events-and-eSports-Header_0.jpg?itok=KYOzKqeI' },
       date: '2022-10-10',
       time: '15:00',
-      comments: undefined,
+      plats: "Stockholm, Friends Arena",
+      comments: [],
     },
     {
       id: 6,
@@ -53,7 +67,8 @@ function Events() {
       category: { id: 3, name: 'Gaming', img: 'https://mb.cision.com/Public/18576/2880492/b9e71e1efaafd46e_800x800ar.jpg' },
       date: '2022-11-11',
       time: '15:00',
-      comments: undefined,
+      plats: "Göteborg, Gothia Towers",
+      comments: [],
     },
     {
       id: 7,
@@ -61,7 +76,8 @@ function Events() {
       category: { id: 4, name: 'Art', img: 'https://static01.nyt.com/images/2021/09/02/arts/02museums-tour-1/merlin_193884324_93c3f30f-a61b-41b3-baaa-9260d21c5fc6-mobileMasterAt3x.jpg' },
       date: '2022-03-03',
       time: '11:00',
-      comments: undefined,
+      plats: "Stockholm, Historiska Museet",
+      comments: [],
     },
     {
       id: 8,
@@ -69,7 +85,8 @@ function Events() {
       category: { id: 4, name: 'Art', img: 'https://camstl.org/wp-content/uploads/2020/10/Shara-Hughes_Dusty-Kessler_038-scaled-1200x0-c-default.jpg' },
       date: '2022-04-04',
       time: '13:00',
-      comments: undefined,
+      plats: "Göteborg, Universeum",
+      comments: [],
     },
     {
       id: 9,
@@ -77,7 +94,8 @@ function Events() {
       category: { id: 5, name: 'Cars', img: 'https://driveracademy.se/wp-content/uploads/2019/02/Sthlm2-1030x656.jpg' },
       date: '2022-05-22',
       time: '13:00',
-      comments: undefined,
+      plats: "Stockholm, Rinkebyparkeringen",
+      comments: [],
     },
     {
       id: 10,
@@ -85,10 +103,12 @@ function Events() {
       category: { id: 5, name: 'Cars', img: 'https://www.elbilsverige.se/wp-content/uploads/2017/06/fdel061-1170x877.jpg' },
       date: '2022-08-21',
       time: '13:00',
-      comments: undefined,
+      plats: "Göteborg, Sisjön 421",
+      comments: [],
     },
   ];
   const [events, setEvents] = useState<Event[]>(eventData);
+ 
 
   const P = styled.p`
 padding:0;
@@ -112,7 +132,7 @@ flex-direction:column;
 margin:0;
 padding:0;
 margin-top:4em;
-
+width:100%;
 
 @media${device.mobileL}{
   background-image: linear-gradient(to bottom, #ffffff, #f6f6f7, #edeeef, #e4e5e7, #dbdddf);
@@ -162,16 +182,17 @@ padding:0 0.5em;
 padding-bottom:1.3em;
 `
 
-  const allEvents = eventData.map(data => {
-    return data
-  })
+
+
 
   // console.log(totalEvents);
-
-  const fetchedUser = JSON.parse(localStorage.getItem("User")!)
-
+  let fetchedUser = JSON.parse(localStorage.getItem('User')!);
+  
   function attendEvent(event: any) {
     let fetchedUser = JSON.parse(localStorage.getItem('User')!);
+    const filteredUser = fetchedUser.filter((data: any) => {
+      return data;
+    })[0]
     let userEventExists: boolean = false;
     let eventAlreadyAdded: boolean = false;
 
@@ -197,16 +218,21 @@ padding-bottom:1.3em;
     }
   }
 
+  const filteredName = fetchedUser.map((data: any) => {
+    return data.favorite
+  })[10]
+
 useEffect(() => {
-  sortEvents(fetchedUser.favorite)
+  sortEvents(filteredName)
 }, [])
 
   function sortEvents(arg: string): void {
-    if (fetchedUser.favorite === arg) {
-      const prefferdArray = events.filter(
+    console.log("filtered favo", filteredName)
+    if (filteredName === arg) {
+      const prefferdArray: Event[] = events.filter(
         (element) => element.category.name === arg
       );
-      const restArray = events.filter(
+      const restArray: Event[] = events.filter(
         (element) => element.category.name !== arg
       );
       const joinArray: Event[] = prefferdArray.concat(restArray);
@@ -216,13 +242,15 @@ useEffect(() => {
   }
   
   const history = useHistory()
-function goToDetails(inputId: any){
+  
+function goToDetails(inputId: number){
   history.push(`/event/${inputId}`)
 }
 
   return (
+    
     <div>
-      
+      {/* <Eventdetails bap={events}/> */}
       <EventUL>
       <H3 style={{textAlign:"center", fontSize:"1.8em", fontWeight:"400"}}>Evenemang just nu</H3>
         {events.map((e) => (
@@ -236,6 +264,10 @@ function goToDetails(inputId: any){
             {/* <P>Kategori:{e.category.name.charAt(0).toUpperCase() + e.category.name.slice(1)}</P> */}
             
             <P style={{paddingTop:"0.5em", fontWeight:"600"}}>{e.name}</P>
+
+            <Button variant="contained" style={{marginTop:"1.4em", marginBottom:"0"}} size="medium" endIcon={<EventAvailableIcon/>} onClick={() => attendEvent(e)} data-testid={e.name}>
+              Attend
+            </Button>
             </Textdiv>
             
             </Eventsdiv>

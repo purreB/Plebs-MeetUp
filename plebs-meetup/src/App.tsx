@@ -11,7 +11,10 @@ import Categories from './components/Category/Categories';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Eventdetails from "./components/Eventdetails/Eventdetails";
 
-const AppContainer = styled.div``;
+
+const AppContainer = styled.div`
+`;
+
 
 function App() {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
@@ -34,9 +37,9 @@ function App() {
       <Landing />
       </Route>
       
-      <Route  path="/eventdetails">
+      {/* <Route  path="/eventdetails">
         <Eventdetails/>
-      </Route>
+      </Route> */}
       
         <Route path="/event/:id">
           <Eventdetails/> 
