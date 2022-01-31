@@ -11,3 +11,6 @@ A webbapp that lets users sign up and discuss different kind of events, the user
 - As a first time user i want to choose what types of events i find the most interesting
 
 ## After git clone make sure you CD into plebs-meetup folder, run npm i.
+
+## Published using surge
+https://zealous-soda.surge.sh/
